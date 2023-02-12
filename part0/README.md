@@ -1,0 +1,1 @@
+My solutions for part 0 exercises
