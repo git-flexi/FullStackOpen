@@ -7,7 +7,7 @@ const Persons = ({ persons, filter }) => {
                         persons.filter((person) => {
                             return filter === '' ? true : person.name.toUpperCase().includes(filter.toUpperCase());
                         }).map((person) => {
-                            return <tr key={person.name}><td>{person.name}</td><td>{person.number}</td></tr>;
+                            return <tr key={person.id}><td>{person.name}</td><td>{person.number}</td></tr>;
                         })
                     }
                 </tbody>
