@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
+import personService from './services/personService';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
@@ -12,10 +12,9 @@ const App = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('Response received!', response);
-        setPersons(response.data);
+    personService.getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons);
       });
   }, []);
 
@@ -39,19 +38,45 @@ const App = () => {
       return;
     }
 
-    if (persons.some(person => { return person.name.toUpperCase() === newName.toUpperCase(); })) {
-      alert(`${newName} is alreay added to phonebook`);
-      return;
-    }
-
     if (persons.some(person => { return person.number.toUpperCase() === newNumber.toUpperCase(); })) {
-      alert(`${newNumber} is alreay added to phonebook`);
+      alert(`The number ${newNumber} is alreay added to phonebook`);
       return;
     }
 
-    setPersons(persons.concat({ name: newName, number: newNumber, id: persons.length + 1 }));
-    setNewName('');
-    setNewNumber('');
+    if (persons.some(person => { return person.name.toUpperCase() === newName.toUpperCase(); })) {
+      if (!window.confirm(`The name ${newName} is already in the phonebook. Do you want to replace the old number with a new one?`)) {
+        return;
+      }
+
+      const existingPerson = persons.find(person => person.name.toUpperCase() === newName.toUpperCase());
+      existingPerson.number = newNumber;
+
+      personService.update(existingPerson.id, existingPerson)
+        .then(returnedPerson => {
+          setPersons(persons.map(person => { return person.id !== returnedPerson.id ? person : returnedPerson; }));
+          setNewName('');
+          setNewNumber('');
+        });
+    } else {
+      personService.add()
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson));
+          setNewName('');
+          setNewNumber('');
+        });
+    }
+  };
+
+  const deleteEntry = (id, name) => {
+    if (!window.confirm(`Do you really want to delete ${name}?`)) {
+      return;
+    }
+
+    personService.remove(id)
+      .then(returnedPerson => {
+        console.log(returnedPerson);
+        setPersons(persons.filter(person => person.id !== id));
+      });
   };
 
   return (
@@ -61,7 +86,7 @@ const App = () => {
       <h3>Add a new entry</h3>
       <PersonForm nameValue={newName} nameChange={nameChange} numberValue={newNumber} numberChange={numberChange} submitHandler={addEntry} />
       <h3>Numbers</h3>
-      <Persons persons={persons} filter={filter} />
+      <Persons persons={persons} filter={filter} deleteHandler={deleteEntry} />
     </div>
   );
 };
