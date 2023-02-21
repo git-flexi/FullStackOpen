@@ -11,7 +11,7 @@ const Persons = ({ persons, filter, deleteHandler }) => {
                                 <tr key={person.id}>
                                     <td>{person.name}</td>
                                     <td>{person.number}</td>
-                                    <td><button onClick={() => deleteHandler(person.id, person.name)}>delete</button></td>
+                                    <td><button onClick={() => deleteHandler(person.id)}>delete</button></td>
                                 </tr>
                             );
                         })
