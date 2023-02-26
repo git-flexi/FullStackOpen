@@ -56,24 +56,20 @@ const App = () => {
       return;
     }
 
-    if (persons.some(person => { return person.name.toUpperCase() === newPerson.name.toUpperCase(); })) {
+    const existingPerson = persons.find(person => person.name.toUpperCase() === newPerson.name.toUpperCase());
+    if (existingPerson) {
       if (!window.confirm(`The name ${newPerson.name} is already in the phonebook. Do you want to replace the old number with a new one?`)) {
         return;
       }
 
-      const existingPerson = persons.find(person => person.name.toUpperCase() === newPerson.name.toUpperCase());
-      existingPerson.number = newPerson.number;
-
-      personService.update(existingPerson.id, existingPerson)
+      personService.update(existingPerson.id, { ...existingPerson, number: newPerson.number })
         .then(returnedPerson => {
           setPersons(persons.map(person => { return person.id !== returnedPerson.id ? person : returnedPerson; }));
           setNewPerson({ name: '', number: '' });
           showSuccessMessage(`${returnedPerson.name} successfully updated!`);
         })
         .catch(error => {
-          showErrorMessage(`Information for ${existingPerson.name} has already been removed from the server!`);
-          setNewPerson({ name: '', number: '' });
-          setPersons(persons.filter(person => person.id !== existingPerson.id));
+          showErrorMessage(error.response.data.error);
         });
     } else {
       personService.add(newPerson)
@@ -81,6 +77,9 @@ const App = () => {
           setPersons(persons.concat(returnedPerson));
           setNewPerson({ name: '', number: '' });
           showSuccessMessage(`${returnedPerson.name} successfully added!`);
+        })
+        .catch(error => {
+          showErrorMessage(error.response.data.error);
         });
     }
   };
