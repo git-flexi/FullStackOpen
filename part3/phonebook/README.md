@@ -5,4 +5,12 @@ https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-7-3-8
 
 https://fullstackopen.com/en/part3/deploying_app_to_internet#exercises-3-9-3-11
 
-# LINK TO HOSTED APP: https://phonebook-tnds.onrender.com/
+https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercise-3-12
+
+https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-13-3-14
+
+https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-15-3-18
+
+# Link to hosted app: 
+https://phonebook-tnds.onrender.com/
+

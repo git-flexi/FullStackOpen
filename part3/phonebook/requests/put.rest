@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/persons/63fb6da58b5cc96ff3b4539f
+Content-Type: application/json
+
+{
+        "name": "Peter Wackelig",
+        "number": "134-78654-987"
+}
