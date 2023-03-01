@@ -101,7 +101,7 @@ describe('most blogs', () => {
 });
 
 describe('most likes', () => {
-  test.only('gimme the most liked author', () => {
+  test('gimme the most liked author', () => {
     const result = listHelper.mostLikes(multiBlogs);
     expect(result).toEqual({ author: 'Edsger W. Dijkstra', likes: 17 });
   });
