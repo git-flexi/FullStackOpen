@@ -6,15 +6,17 @@ body {
   font-style: normal;
   line-height: 1.5;
   font-weight: 400;
-  background: #ffffff;
   position: relative;
-  color: aliceblue;
+  background: rgb(51, 63, 73);
+  color: whitesmoke;
 }
 
 .content {
-  padding: 25px;
-  background: #373C42;
-  border-radius: 2px;
+  width: 40%;
+  margin: 0 auto;
+  padding: 0 25px 25px;
+  background: #25282c;
+  border-radius: 8px;
 }
 
 /* CSS */
@@ -67,4 +69,22 @@ button:hover:after {
 form .input-block label {
   display: inline-block;
   width: 100px;
+}
+
+.blog {
+  display: block;
+  border-bottom: 2px solid #E5E7EB;
+  margin: 0 0 10px;
+}
+
+.blogTitle {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.blogProps {
+  font-weight: 200;
+  font-style: italic;
+  display: inline-block;
+  margin: 0 1em 0 0;
 }
