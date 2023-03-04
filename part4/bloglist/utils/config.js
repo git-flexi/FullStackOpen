@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 require('dotenv').config();
 
 const PORT = process.env.PORT;
