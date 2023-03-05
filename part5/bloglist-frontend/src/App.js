@@ -68,6 +68,7 @@ const App = () => {
   };
 
   const handleLogout = (event) => {
+    event.preventDefault();
     window.localStorage.removeItem('loggedNoteappUser');
     blogService.setToken(null);
     setUser(null);
