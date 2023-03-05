@@ -84,6 +84,24 @@ const App = () => {
     }
   };
 
+  const handleLike = async (blog) => {
+    try {
+      const updatedBlog = await blogService.update(blog);
+      setBlogs(blogs.map((each) => each.id === updatedBlog.id ? updatedBlog : each));
+    } catch (exception) {
+      showErrorMessage(exception.response.data.error);
+    }
+  };
+
+  const handleDelete = async (blog) => {
+    try {
+      await blogService.remove(blog);
+      setBlogs(blogs.filter((each) => each.id !== blog.id));
+    } catch (exception) {
+      showErrorMessage(exception.response.data.error);
+    }
+  };
+
   const blogForm = () => {
     return (
       <Togglable buttonLabel='new blog' ref={blogFormRef}>
@@ -117,8 +135,8 @@ const App = () => {
       {user && blogForm()}
       <div>
         <h2>Blogs</h2>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+        {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
+          <Blog key={blog.id} user={user} blog={blog} handleLike={handleLike} handleDelete={handleDelete} />
         )}
       </div>
     </div>
