@@ -35,7 +35,7 @@ const Blog = ({ user, blog, handleLike, handleDelete }) => {
         <div className='blogProps'>Likes: {blog.likes} <button onClick={likeBlog}>like</button></div>
         <div className='blogProps'>Created by: {blog.user.name}</div>
         {
-          user && user.id === blog.user.id
+          user && user.username === blog.user.username
           && <div className='blogProps'><button className='deleteButton' onClick={deleteBlog}>delete</button></div>
         }
       </div>
