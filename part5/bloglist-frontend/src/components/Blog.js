@@ -30,10 +30,13 @@ const Blog = ({ user, blog, handleLike, handleDelete }) => {
         {blog.title} by {blog.author}
         <button onClick={toggleVisibility}>{visible ? 'hide' : 'view'}</button>
       </div>
-      <div style={showWhenVisible}>
+      <div className='blogPropContainer' style={showWhenVisible}>
         <div className='blogProps'>URL: <a href={blog.url}>{blog.url}</a></div>
         <div className='blogProps'>Likes: {blog.likes} <button onClick={likeBlog}>like</button></div>
-        <div className='blogProps'>Created by: {blog.user.name}</div>
+        {
+          blog.user
+          && <div className='blogProps'>Created by: {blog.user.name}</div>
+        }
         {
           user && user.username === blog.user.username
           && <div className='blogProps'><button className='deleteButton' onClick={deleteBlog}>delete</button></div>
