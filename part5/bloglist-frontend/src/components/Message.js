@@ -22,7 +22,7 @@ const Message = ({ messageObject }) => {
   };
 
   return (
-    <div style={messageStyle}>
+    <div className='message' style={messageStyle}>
       <em>{messageObject.messageText}</em>
     </div>
   );
