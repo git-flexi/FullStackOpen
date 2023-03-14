@@ -4,7 +4,7 @@ const messageSlice = createSlice({
   name: 'message',
   initialState: '',
   reducers: {
-    showMessage(state, action) {
+    setMessage(state, action) {
       return action.payload;
     },
     clearMessage(state, action) {
@@ -13,6 +13,19 @@ const messageSlice = createSlice({
   }
 });
 
-export const { showMessage, clearMessage } = messageSlice.actions;
+export const { setMessage, clearMessage } = messageSlice.actions;
+
+export const showMessage = (message, time) => {
+  return dispatch => {
+    if (!time) {
+      time = 5;
+    }
+
+    dispatch(setMessage(message));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, time * 1000);
+  };
+};
 
 export default messageSlice.reducer;
