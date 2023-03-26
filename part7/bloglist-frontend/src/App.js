@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { showErrorMessage } from './reducers/messageReducer';
 import { initializeBlogs } from './reducers/blogReducer';
+import { checkLogin, login, logout } from './reducers/userReducer';
 import { useSelector } from 'react-redux';
-import blogService from './services/blogService';
-import loginService from './services/login';
 import Togglable from './components/Toggable';
 import LoginForm from './components/LoginForm';
 import BlogForm from './components/BlogForm';
@@ -13,8 +12,8 @@ import Message from './components/Message';
 
 const App = () => {
   const blogs = useSelector(state => state.blogs);
+  const user = useSelector(state => state.user);
 
-  const [user, setUser] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -25,38 +24,19 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
-      blogService.setToken(user.token);
-    }
+    dispatch(checkLogin());
   }, []);
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
-      const user = await loginService.login({
-        username,
-        password,
-      });
-
-      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user));
-      blogService.setToken(user.token);
-      setUser(user);
+      dispatch(login(username, password));
       setUsername('');
       setPassword('');
     } catch (exception) {
       dispatch(showErrorMessage(exception.response.data.error));
     }
-  };
-
-  const handleLogout = (event) => {
-    event.preventDefault();
-    window.localStorage.removeItem('loggedBlogappUser');
-    blogService.setToken(null);
-    setUser(null);
   };
 
   const blogForm = () => {
@@ -89,7 +69,7 @@ const App = () => {
       {user && (
         <div>
           <div>{user.name} logged in</div>
-          <button type="button" onClick={handleLogout}>
+          <button type="button" onClick={() => dispatch(logout())}>
             logout
           </button>
         </div>
@@ -102,7 +82,6 @@ const App = () => {
           .map((blog) => (
             <Blog
               key={blog.id}
-              user={user}
               blog={blog}
             />
           ))}
