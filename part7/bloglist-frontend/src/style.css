@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: 1rem;
+  font-style: normal;
+  line-height: 1.5;
+  font-weight: 400;
+  position: relative;
+  background: rgb(51, 63, 73);
+  color: whitesmoke;
+}
+
+.content {
+  width: 40%;
+  margin: 0 auto;
+  padding: 0 25px 15px;
+  background: #25282c;
+  border-radius: 8px;
+}
+
+a {
+  color: whitesmoke;
+}
+
+form .input-block label {
+  display: inline-block;
+  width: 100px;
+}
+
+.blog {
+  display: block;
+  border-bottom: 2px solid #e5e7eb;
+  margin: 0 0 10px;
+  padding: 0 0 10px;
+}
+
+.blogTitle {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.blogProps {
+  font-weight: 200;
+  font-style: italic;
+  padding: 0 1em 0 0;
+}
+
+.blog .deleteButton {
+  margin: 0px;
+  padding: 0px 10px 0px;
+  background-color: #811919;
+  color: whitesmoke;
+}
+
+/* CSS */
+button {
+  align-self: center;
+  background-color: whitesmoke;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  outline: none;
+  padding: 5px 15px;
+  margin: 10px 0 0;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+button:focus {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
+}
+
+.blog button {
+  padding: 0 5px;
+  margin: 0 0 0 10px;
+}
