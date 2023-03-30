@@ -9,14 +9,14 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       return action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { setUser } = userSlice.actions;
 
 export const checkLogin = () => {
-  return dispatch => {
+  return (dispatch) => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
@@ -27,7 +27,7 @@ export const checkLogin = () => {
 };
 
 export const login = (username, password) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const user = await loginService.login({
       username,
       password,
@@ -39,7 +39,7 @@ export const login = (username, password) => {
 };
 
 export const logout = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     window.localStorage.removeItem('loggedBlogappUser');
     blogService.setToken(null);
     dispatch(setUser(null));

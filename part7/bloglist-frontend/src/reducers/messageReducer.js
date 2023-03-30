@@ -10,14 +10,14 @@ const messageSlice = createSlice({
     },
     clearMessage(state, action) {
       return null;
-    }
-  }
+    },
+  },
 });
 
 export const { setMessage, clearMessage } = messageSlice.actions;
 
 const showMessage = (message, messageType, time) => {
-  return dispatch => {
+  return (dispatch) => {
     if (!time) {
       time = 5;
     }
@@ -32,13 +32,13 @@ const showMessage = (message, messageType, time) => {
 };
 
 export const showSuccessMessage = (message, time) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(showMessage(message, 'success', time));
   };
 };
 
 export const showErrorMessage = (message, time) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(showMessage(message, 'error', time));
   };
 };
